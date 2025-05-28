@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Notebook} from 'lucide-react';
+import { Notebook } from 'lucide-react';
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 
@@ -8,26 +8,27 @@ function Login() {
     const [password, setPassword] = useState();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-      e.preventDefault();
-      setError("");
+        e.preventDefault();
+        setError("");
 
-      if (!email || !password) {
-         return setError("Please fill in all fields");
-      }
+        if (!email || !password) {    
+            return setError("Please fill in all fields");
+        }
 
-      try {
-        setLoading(true);
-        await login(email, password);
-        navigate("/dashboard");
-      } catch (err) {
-        setError("Failed to create an account: " + (err.message || "Please try again"))
-      } finally {
-        setLoading(false);
-      }
+        try {
+            setLoading(true);
+            await login(email, password);
+            navigate("/dashboard");
+        } catch (err) {
+            setError("Failed to create an account: " + (err.message || "Please try again"))
+        } finally {
+            setLoading(false);
+        }
     };
     
     return (

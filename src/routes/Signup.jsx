@@ -20,7 +20,7 @@ function Signup() {
         if (!email || !password || !passwordConfirm) {
             return setError("Please fill in all fields");
         }
-
+        
         if (password !== passwordConfirm) {
             return setError("Passwords do not match");
         }
@@ -33,6 +33,18 @@ function Signup() {
             setLoading(true);
             await signup(email, password);
             navigate("/dashboard");
+
+        //if (!email || !password || !passwordConfirm) {
+          //  return setError("Please fill in all fields");
+        //}
+        
+        //if (password !== passwordConfirm) {
+          //  return setError("Passwords do not match");
+        //}
+
+        //if (password.length < 6) {
+          //  return setError("Password must be at least 6 characters");
+        //}    
         } catch (err) {
             setError("Failed to create an account: " + (err.message || "Please try again"))
         } finally {
@@ -72,7 +84,7 @@ function Signup() {
                             id="email"
                             type="email"
                             value={email}
-                            onChanged={(e)=> setEmail(e.target.value)}
+                            onChange={(e)=> setEmail(e.target.value)}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             placeholder="you@example.com"
                             required
@@ -87,7 +99,7 @@ function Signup() {
                             id="password"
                             type="password"
                             value={password}
-                            onChanged={(e)=> setPassword(e.target.value)}
+                            onChange={(e)=> setPassword(e.target.value)}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             placeholder="********"
                             required
@@ -100,7 +112,7 @@ function Signup() {
                             id="password-confirm"
                             type="password"
                             value={passwordConfirm}
-                            onChanged={(e)=> setPasswordConfirm(e.target.value)}
+                            onChange={(e)=> setPasswordConfirm(e.target.value)}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             placeholder="********"
                             required
