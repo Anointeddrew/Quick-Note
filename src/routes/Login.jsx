@@ -60,7 +60,7 @@ function Login() {
                                 id="email"
                                 type="email"
                                 value={email}
-                                onchanged={(e) => setEmail(e.target.value)}
+                                onchange={(e) => setEmail(e.target.value)}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 placeholder="you@example.com"
                                 required
@@ -74,7 +74,7 @@ function Login() {
                                 id="password"
                                 type="password"
                                 value={password}
-                                onchanged={(e) => setPassword(e.target.value)}
+                                onchange={(e) => setPassword(e.target.value)}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 placeholder="********"
                                 required
