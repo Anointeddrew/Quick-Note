@@ -33,18 +33,6 @@ function Signup() {
             setLoading(true);
             await signup(email, password);
             navigate("/dashboard");
-
-        //if (!email || !password || !passwordConfirm) {
-          //  return setError("Please fill in all fields");
-        //}
-        
-        //if (password !== passwordConfirm) {
-          //  return setError("Passwords do not match");
-        //}
-
-        //if (password.length < 6) {
-          //  return setError("Password must be at least 6 characters");
-        //}    
         } catch (err) {
             setError("Failed to create an account: " + (err.message || "Please try again"))
         } finally {

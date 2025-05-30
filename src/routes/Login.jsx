@@ -16,7 +16,7 @@ function Login() {
         e.preventDefault();
         setError("");
 
-        if (!email || !password) {    
+       if (!email || !password) {    
             return setError("Please fill in all fields");
         }
 
@@ -24,6 +24,8 @@ function Login() {
             setLoading(true);
             await login(email, password);
             navigate("/dashboard");
+
+        
         } catch (err) {
             setError("Failed to create an account: " + (err.message || "Please try again"))
         } finally {
@@ -37,6 +39,7 @@ function Login() {
                 <div className="flex flex-col items-center mb-6">
                     <Notebook className="h-12 w-12 text-indigo-600 mb-2" />
                     <h2 className="text-2xl font-bold text-gray-900">
+                        {" "}
                         Welcome back!</h2>
                     <p className="text-gray-600">Sign in to access your notes</p>
                     </div>
@@ -60,7 +63,7 @@ function Login() {
                                 id="email"
                                 type="email"
                                 value={email}
-                                onchange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 placeholder="you@example.com"
                                 required
@@ -74,7 +77,7 @@ function Login() {
                                 id="password"
                                 type="password"
                                 value={password}
-                                onchange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => setPassword(e.target.value)}
                                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 placeholder="********"
                                 required
