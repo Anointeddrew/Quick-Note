@@ -75,7 +75,7 @@ function NoteForm() {
                     id="title"
                     type="text"
                     value={title}
-                    onChange={(e) => setTitle(e.target.valaue)}
+                    onChange={(e) => setTitle(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     placeholder="Note title"
                     maxLength={100}
@@ -90,7 +90,7 @@ function NoteForm() {
                     id="content"
                     type="text"
                     value={content}
-                    onChange={(e) => setContent(e.target.valaue)}
+                    onChange={(e) => setContent(e.target.value)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     placeholder="Write your note here"
                     rows={4}
