@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {doc, deleteDoc, updateDoc, Timestamp} from 'firebase/firestore';
 import {db} from "../../firebaseconfig";
-import {Trash2, Pencil} from 'lucide-react';
+import {Trash2, Pencil, icons, Icon, TvIcon} from 'lucide-react';
 
 
 function NoteCard({note}) {
@@ -17,7 +17,7 @@ function NoteCard({note}) {
         if (!timestamp) return "Just Now";
 
         const date = timestamp.toDate();
-        return new Intl.DateTimeFormat('en-US', {
+        return new Intl.DateTimeFormat('en-NG', {
             month:"short",
             day:"numeric",
             year:"numeric",
