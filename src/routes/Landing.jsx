@@ -14,7 +14,7 @@ function Landing() {
                         Capture your ideas with Quicknotes
                     </h1>
                     <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                        A simple fast and secure way to keep track of your thoughts, ideas, and important information.
+                        A simple, fast and secure way to keep track of your thoughts, ideas, and important information.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link to="/signup" className="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">
