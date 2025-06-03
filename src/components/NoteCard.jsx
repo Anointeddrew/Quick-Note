@@ -10,6 +10,8 @@ function NoteCard({note}) {
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(note.title);
     const [content, setContent] = useState(note.content);
+    const [reminderTime, setReminderTime] = useState(note.reminderTime?.toDate().toISOString().slice(0, 16) || '');
+    const [savingReminder, setSavingReminder] = useState(false);
 
     const formDate = (timestamp) => {
         if (!timestamp) return "Just Now";
@@ -57,7 +59,50 @@ function NoteCard({note}) {
         } catch (error) {
             console.error('Error updating note:', error);
         }
+
     };
+
+     const handleSetReminder = async () => {
+        if (!reminderTime) return;
+
+        try {
+            setSavingReminder(true);
+            const noteRef = doc(db, 'notes', note.id);
+            await updateDoc(noteRef, {
+                reminderTime: Timestamp.fromDate(new Date(reminderTime)),
+            });
+            setSavingReminder(false);
+            alert('Reminder set!');
+        } catch (error) {
+            console.error('Failed to set reminder:', error);
+            setSavingReminder(false);
+        }
+    };
+
+    useEffect(() => {
+        if (!note.reminderTime || typeof Notification === 'undefined') return;
+
+        if (Notification.permission !== 'granted') {
+            Notification.requestPermission();    
+        }
+
+        const now = new Date();
+        const reminderDate = note.reminderTime.toDate();
+        const timeUntilReminder = reminderDate - now;
+
+        if (timeUntilReminder > 0) {
+            const timer = setTimeout(() => {
+                if (Notification.permission === 'granted') {
+                    new Notification(`Reminder: ${note.title}`, {
+                        body: note.content || 'You have a reminder in QuickNotes.',
+                        icon: '/reminder-icon.png',
+                    });
+                }
+            }, timeUntilReminder);
+
+            return () => clearTimeout(timer);
+        }
+    }, [note.reminderTime]);
     
     return (
         <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">
@@ -97,7 +142,7 @@ function NoteCard({note}) {
                     <button onClick={() => {
                         setEditing(false);
                         setTitle(note.title);
-                        setContent(note,content);
+                        setContent(note.content);
                     }}
                     className="text-gray-500 hover:text-gray-700"
                     >
@@ -113,6 +158,28 @@ function NoteCard({note}) {
 
                 <div className="mt-2 text-sm text-gray-500">
                     {formDate(note.createdAt)}
+                </div>
+
+                {note.reminderTime && (
+                    <div className="text-sm text-blue-600">
+                        Reminder set for {formDate(note.reminderTime)}
+                </div>
+                )}
+
+                <div className="mt-2">
+                    <input
+                       type="datetime-local"
+                       value={reminderTime}
+                       onChange={(e) => setReminderTime(e.target.value)}
+                       className="border rounded px-2 py-1 mr-2"
+                    />
+                    <button
+                       onClick={handleSetReminder}
+                       disabled={savingReminder}
+                       className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                    >
+                       {savingReminder ? 'Saving...' : 'Set Reminder'}
+                    </button>
                 </div>
             </div>
             
