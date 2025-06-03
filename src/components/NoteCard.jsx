@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {doc, deleteDoc, updateDoc, Timestamp} from 'firebase/firestore';
 import {db} from "../../firebaseconfig";
-import {Trash2, Pencil, icons, Icon, TvIcon} from 'lucide-react';
+import {Trash2, Pencil} from 'lucide-react';
 
 
 function NoteCard({note}) {
@@ -10,7 +10,13 @@ function NoteCard({note}) {
     const [editing, setEditing] = useState(false);
     const [title, setTitle] = useState(note.title);
     const [content, setContent] = useState(note.content);
-    const [reminderTime, setReminderTime] = useState(note.reminderTime?.toDate().toISOString().slice(0, 16) || '');
+    const [reminderTime, setReminderTime] = useState(() => {
+        if (!note.reminderTime) return '';
+        const date = note.reminderTime.toDate();
+        const offset = date.getTimezoneOffset();
+        const localDate = new Date(date.getTime() - offset * 60 * 1000);
+        return localDate.toISOString().slice(0, 16);
+    })  //useState(note.reminderTime?.toDate().toISOString().slice(0, 16) || '');
     const [savingReminder, setSavingReminder] = useState(false);
 
     const formDate = (timestamp) => {
