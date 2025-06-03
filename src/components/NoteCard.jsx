@@ -17,7 +17,7 @@ function NoteCard({note}) {
         if (!timestamp) return "Just Now";
 
         const date = timestamp.toDate();
-        return new Intl.DateTimeFormat('en-NG', {
+        return new Intl.DateTimeFormat('en-US', {
             month:"short",
             day:"numeric",
             year:"numeric",
