@@ -108,7 +108,7 @@ function NoteCard({note}) {
 
             return () => clearTimeout(timer);
         }
-    }, [note.reminderTime]);
+    }, [note.content, note.reminderTime, note.title]);
     
     return (
         <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-200">

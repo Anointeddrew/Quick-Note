@@ -6,9 +6,15 @@ import Navbar from "./components/Navbar";
 import { useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./routes/Dashboard";
+import { useEffect } from 'react';
+import { requestNotificationPermission } from './notifications'
 
 function App() {
   const {loading, currentUser} = useAuth();
+
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
 
   if (loading) {
     return (
