@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 
 function Login() {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -27,7 +27,7 @@ function Login() {
 
         
         } catch (err) {
-            setError("Failed to create an account: " + (err.message || "Please try again"))
+            setError("Failed to sign in: " + (err.message || "Please try again"))
         } finally {
             setLoading(false);
         }
@@ -83,6 +83,14 @@ function Login() {
                                 required
                                 />
                         </div>
+
+                        <div className="text-right mb-4">
+                        <Link to="/forgot-password" className="text-sm text-indigo-600 hover:text-indigo-800 font-medium">
+                            Forgot password?
+                        </Link>
+                        </div>
+
+
                         <button className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed mt-4" type="submit" disabled={loading}>
                             {loading ? "Signing in..." : "Sign in"}
                         </button>
@@ -94,7 +102,7 @@ function Login() {
                             <Link to="/signup"
                                 className="text-indigo-600 hover:text-indigo-800 font-medium"
                             >
-                            Signup</Link>
+                            Sign Up</Link>
                         </p>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
+    sendPasswordResetEmail,
     onAuthStateChanged
 } from 'firebase/auth'
 
@@ -51,6 +52,16 @@ export function AuthProvider({ children }) {
         }
     }
 
+    async function resetPassword(email) {
+        setError("");
+        try {
+            return await sendPasswordResetEmail(auth, email);
+        } catch (err) {
+            setError(err.message);
+            throw err;
+        }
+    }
+
     useEffect(()=> {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
@@ -66,7 +77,8 @@ export function AuthProvider({ children }) {
         signup,
         login,
         error,
-        loading
+        loading,
+        resetPassword
     }
 
     return (

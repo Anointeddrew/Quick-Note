@@ -7,6 +7,7 @@ import { useAuth } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./routes/Dashboard";
 import { useEffect } from 'react';
+import ForgotPassword from "./components/ForgotPassword"
 import { requestNotificationPermission } from './notifications'
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="/signup" element={ currentUser ? <Navigate to="/dashboard" replace />  : 
           <Signup />
         } />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <div className="container mx-auto px-4 py-8">

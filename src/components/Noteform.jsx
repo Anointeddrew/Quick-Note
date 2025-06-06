@@ -66,6 +66,7 @@ function NoteForm() {
                 )
             }
 
+
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
@@ -86,6 +87,7 @@ function NoteForm() {
                     <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
                         Content
                     </label>
+                    
                     <textarea
                     id="content"
                     type="text"
